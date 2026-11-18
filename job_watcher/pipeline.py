@@ -52,7 +52,9 @@ def make_status(rows: list[dict], results: list[dict], run_time: str, date: str)
         "open": sum(1 for r in rows if r["status"] == "open"),
         "new_today": sum(1 for r in rows if r["first_seen"] == date and not r["first_run"]),
         "removed_today": sum(1 for r in rows if r["removed_date"] == date),
-        "sources": [{"name": r["name"], "ok": r["ok"], "count": r["count"]} for r in results],
+        # most postings first; ties and failed sources (count 0) in name order
+        "sources": [{"name": r["name"], "ok": r["ok"], "count": r["count"]}
+                    for r in sorted(results, key=lambda r: (-r["count"], r["name"]))],
     }
 
 

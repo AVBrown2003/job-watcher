@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("n-new").textContent = status.new_today;
     document.getElementById("n-removed").textContent = status.removed_today;
 
-    document.getElementById("sources").innerHTML = status.sources.map(s =>
+    document.getElementById("sources").innerHTML = [...status.sources].sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)).map(s =>
       `<tr>${sourceCell(s.name)}<td>${s.count}</td><td><span class="mark ${s.ok ? "yes" : "no"}" role="img" aria-label="${s.ok ? "Loaded" : "Failed"}" title="${s.ok ? "Loaded" : "Failed"}">${s.ok ? "✓" : "✗"}</span></td></tr>`).join("");
 
     const item = r => `<li><span class="${r.in_role ? "" : "sub"}">${r.in_role ? '<span class="pill">YOUR ROLE</span>' : ""}</span>` +

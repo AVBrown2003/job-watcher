@@ -27,6 +27,13 @@ def test_status_counts(monkeypatch):
     assert st["sources"] == [{"name": "s", "ok": True, "count": 3}]
 
 
+def test_status_sources_sorted_by_postings_listed():
+    results = [{"name": "b", "ok": True, "count": 5}, {"name": "z", "ok": False, "count": 0},
+               {"name": "a", "ok": True, "count": 5}, {"name": "c", "ok": True, "count": 9}]
+    st = pipeline.make_status([], results, "2026-01-02T09:00:00Z", "2026-01-02")
+    assert [x["name"] for x in st["sources"]] == ["c", "a", "b", "z"]
+
+
 def test_issue_body_lists_new_and_removed_with_links():
     rows = [row("a", first_seen="2026-01-02", title="New Job", url="https://x/a"),
             row("b", status="removed", removed_date="2026-01-02", title="Gone", url="https://x/b")]

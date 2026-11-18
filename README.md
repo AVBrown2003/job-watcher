@@ -82,7 +82,7 @@ History rules, applied day by day for each source that has a raw file that day:
 
 Three pages that load the two data files in the browser and compute everything there:
 
-- **Today** (`index.html`): last run time, status of every source (each shown with its capitalized name, logo and company color), the four counts, and the new and removed postings of the latest run.
+- **Today** (`index.html`): last run time, status of every source, sorted by postings listed (each shown with its capitalized name, logo and company color, and a green check or red X), the four counts, and the new and removed postings of the latest run.
 - **Browse** (`browse.html`): open postings, in-role or all, with filters (employer, location, days open), title search, sort by first-seen date, an apply link, and a star to save a posting to a shortlist that stays in the browser.
 - **Market** (`market.html`): six findings computed from the history (new per day, removed per day, open per employer, days open and its median, share removed within seven days, top locations).
 

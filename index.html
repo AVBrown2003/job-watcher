@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Today - Job Watcher</title>
+<meta name="description" content="Daily watch on open financial-advisor jobs: what is new and what is gone.">
+<meta name="theme-color" content="#16384f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/common.js" defer></script>
+<script src="assets/today.js" defer></script>
+</head>
+<body>
+<main>
+  <h1>Today</h1>
+  <p class="lede">Last run: <strong id="run-time">loading...</strong></p>
+
+  <div class="cards">
+    <div class="card"><div class="num" id="n-days">-</div><div class="lab">days with a successful run</div></div>
+    <div class="card"><div class="num" id="n-open">-</div><div class="lab">open postings</div></div>
+    <div class="card"><div class="num" id="n-new">-</div><div class="lab">new today</div></div>
+    <div class="card"><div class="num" id="n-removed">-</div><div class="lab">removed today</div></div>
+  </div>
+
+  <h2>Sources</h2>
+  <table>
+    <thead><tr><th>Source</th><th>Status</th><th>Postings listed</th></tr></thead>
+    <tbody id="sources"></tbody>
+  </table>
+
+  <h2>New postings in the latest run</h2>
+  <ul class="list" id="new-list"></ul>
+
+  <h2>Removed postings in the latest run</h2>
+  <ul class="list" id="removed-list"></ul>
+  <p class="note">New postings leave out the first run of each source, when every open posting was already there. Postings in your role (financial advisor) are marked.</p>
+</main>
+<footer>Data updates every day by GitHub Actions. Each day's issue is in the repository's Issues tab.</footer>
+</body>
+</html>

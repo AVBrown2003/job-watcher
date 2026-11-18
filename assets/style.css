@@ -267,3 +267,7 @@ section.finding h2 { text-decoration: none; background: linear-gradient(transpar
   100% { filter: brightness(1); transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
+/* going back (Market > Browse > Today): the previous page turns back over from the left */
+:root:active-view-transition-type(back)::view-transition-old(root) { transform-origin: 50% 50%; z-index: 1; animation-name: page-under; animation-direction: reverse; }
+:root:active-view-transition-type(back)::view-transition-new(root) { transform-origin: 0 55%; z-index: 2; animation-name: page-turn; animation-direction: reverse; animation-timing-function: cubic-bezier(.3, .05, .55, 1); backface-visibility: hidden; }

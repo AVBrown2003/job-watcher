@@ -1,15 +1,35 @@
 {
-  "run_time": "2026-11-18T01:39:30Z",
+  "run_time": "2026-11-18T03:25:12Z",
   "first_run_date": "2026-11-18",
   "days_with_success": 1,
-  "open": 2337,
+  "open": 6156,
   "new_today": 0,
   "removed_today": 0,
   "sources": [
     {
+      "name": "wellsfargo",
+      "ok": true,
+      "count": 1454
+    },
+    {
+      "name": "morganstanley",
+      "ok": true,
+      "count": 1155
+    },
+    {
+      "name": "fidelity",
+      "ok": true,
+      "count": 886
+    },
+    {
       "name": "merrill",
       "ok": true,
       "count": 497
+    },
+    {
+      "name": "lpl",
+      "ok": true,
+      "count": 323
     },
     {
       "name": "raymondjames",
@@ -42,14 +62,14 @@
       "count": 142
     },
     {
-      "name": "upstart",
+      "name": "chime",
       "ok": true,
       "count": 75
     },
     {
-      "name": "chime",
+      "name": "upstart",
       "ok": true,
-      "count": 74
+      "count": 75
     },
     {
       "name": "mercury",

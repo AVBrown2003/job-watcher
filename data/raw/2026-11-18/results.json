@@ -32,7 +32,7 @@
   {
     "name": "chime",
     "ok": true,
-    "count": 74
+    "count": 75
   },
   {
     "name": "affirm",
@@ -88,5 +88,25 @@
     "name": "merrill",
     "ok": true,
     "count": 497
+  },
+  {
+    "name": "morganstanley",
+    "ok": true,
+    "count": 1155
+  },
+  {
+    "name": "lpl",
+    "ok": true,
+    "count": 323
+  },
+  {
+    "name": "wellsfargo",
+    "ok": true,
+    "count": 1454
+  },
+  {
+    "name": "fidelity",
+    "ok": true,
+    "count": 886
   }
 ]

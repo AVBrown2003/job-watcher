@@ -245,15 +245,19 @@ section.finding h2 { text-decoration: none; background: linear-gradient(transpar
 .brand .by { font-size: 1.15rem; font-weight: 400; color: var(--muted); margin-left: 8px; align-self: flex-end; padding-bottom: 2px; white-space: nowrap; }
 @media (max-width: 560px) { .brand { margin-right: 6px; } .brand .by { display: none; } }
 
-/* page turn between Today, Browse and Market: the page lifts at its free edge, bends over the spine and drops its shadow on the next page */
+/* page turn between Today, Browse and Market: only the paper turns, the desk stays put */
 @view-transition { navigation: auto; }
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: 1s; mix-blend-mode: normal; animation-fill-mode: both; }
-::view-transition-old(root) {
-  transform-origin: 0 55%; z-index: 2;
+body { view-transition-name: paper; }
+::view-transition-group(root), ::view-transition-group(paper) { animation: none; }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { display: none; }
+::view-transition-old(paper), ::view-transition-new(paper) { animation-duration: 1s; mix-blend-mode: normal; animation-fill-mode: both; }
+::view-transition-old(paper) {
+  transform-origin: 0 var(--vy, 45vh); z-index: 2;
   animation-name: page-turn; animation-timing-function: cubic-bezier(.45, .05, .3, 1);
   backface-visibility: hidden;
 }
-::view-transition-new(root) { animation-name: page-under; animation-timing-function: cubic-bezier(.3, 0, .3, 1); }
+::view-transition-new(paper) { animation-name: page-under; animation-timing-function: cubic-bezier(.3, 0, .3, 1); }
 @keyframes page-turn {
   0%   { transform: perspective(2600px) rotateY(0) rotateX(0) skewY(0); filter: drop-shadow(0 0 0 rgba(20,30,60,0)) brightness(1); opacity: 1; }
   15%  { transform: perspective(2600px) rotateY(-9deg) rotateX(.6deg) skewY(-.4deg); filter: drop-shadow(14px 6px 14px rgba(20,30,60,.22)) brightness(1); }
@@ -268,9 +272,6 @@ section.finding h2 { text-decoration: none; background: linear-gradient(transpar
 }
 @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
 
-/* going back (Market > Browse > Today): the previous page turns back over from the left */
-:root:active-view-transition-type(back)::view-transition-old(root) { transform-origin: 50% 50%; z-index: 1; animation-name: page-under; animation-direction: reverse; }
-:root:active-view-transition-type(back)::view-transition-new(root) { transform-origin: 0 55%; z-index: 2; animation-name: page-turn; animation-direction: reverse; animation-timing-function: cubic-bezier(.3, .05, .55, 1); backface-visibility: hidden; }
 
 /* page headings on Post-It yellow */
 .hero h1 { display: inline-block; background: #fff3a3; padding: 2px 18px 4px; box-shadow: 3px 4px 0 rgba(28, 47, 120, .13); }
@@ -320,3 +321,6 @@ body { z-index: 1; box-shadow: 0 0 0 3px #2a1f1a, 6px 9px 0 rgba(60, 30, 10, .38
 .list li.more { text-align: center; padding: 10px; }
 .list li.more button { font: inherit; font-size: 1.3rem; font-weight: 700; color: var(--ink); background: #fff3a3; border: 2px solid var(--ink); border-radius: 10px 6px 11px 7px; padding: 4px 22px; cursor: pointer; }
 .list li.more button:hover { background: #ffe66d; }
+/* going back (Market > Browse > Today): the previous page turns back over from the left */
+:root:active-view-transition-type(back)::view-transition-old(paper) { transform-origin: 50% 50%; z-index: 1; animation-name: page-under; animation-direction: reverse; }
+:root:active-view-transition-type(back)::view-transition-new(paper) { transform-origin: 0 var(--vy, 45vh); z-index: 2; animation-name: page-turn; animation-direction: reverse; animation-timing-function: cubic-bezier(.3, .05, .55, 1); backface-visibility: hidden; }

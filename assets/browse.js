@@ -35,45 +35,66 @@ document.addEventListener("DOMContentLoaded", async () => {
   const uniqueSorted = list => [...new Set(list.filter(Boolean))].sort((a, b) => a.localeCompare(b));
   const stateNames = uniqueSorted(open.flatMap(r => r.locs.map(l => l.stateName)));
   const cityLabels = uniqueSorted(open.flatMap(r => r.locs.map(l => l.label)));
+  const citiesOfState = {};
+  open.forEach(r => r.locs.forEach(l => { if (l.stateName && l.label) (citiesOfState[l.stateName.toLowerCase()] ||= []).push(l.label); }));
+  Object.keys(citiesOfState).forEach(k => { citiesOfState[k] = uniqueSorted(citiesOfState[k]); });
   const employers = uniqueSorted(open.map(r => r.employer));
   const DAY_CHOICES = ["7 or fewer", "30 or fewer", "More than 30"];
 
   // A text box with a drop-down of suggestions; optional tabs inside the drop-down.
+  // cfg.drill(text) can return a sub-list (the cities in a chosen state) to show after a pick.
   function makeCombo(root, cfg) {
     const input = root.querySelector("input"), drop = root.querySelector(".drop");
-    let tab = cfg.tabs ? cfg.tabs[0].id : "", active = -1, shown = [];
+    let tab = cfg.tabs ? cfg.tabs[0].id : "", active = -1, rows = [], heading = "";
     const txt = () => input.value.trim().toLowerCase();
     const isExact = () => cfg.items(tab).some(i => i.toLowerCase() === txt());
+    const hide = () => { drop.hidden = true; active = -1; };
+    const done = fn => () => { fn(); cfg.onChange(); };
     function paint() {
       const t = txt(), all = cfg.items(tab);
-      shown = (t && !isExact() ? all.filter(i => i.toLowerCase().includes(t)) : all).slice(0, 200);
-      active = Math.min(active, shown.length - 1);
+      const cities = cfg.drill && tab === "state" && isExact() ? cfg.drill(t) : null;
+      heading = "";
+      if (cities) {
+        const name = all.find(i => i.toLowerCase() === t);
+        heading = `Cities in ${name}`;
+        rows = [
+          { label: "\u25C2 All states", cls: "clear", act: done(() => { input.value = ""; active = -1; paint(); }) },
+          { label: `All of ${name}`, cls: "keep", act: hide },
+        ].concat(cities.map(c => ({ label: c, act: done(() => { tab = "city"; input.value = c; hide(); }) })));
+      } else {
+        const list = (t && !isExact() ? all.filter(i => i.toLowerCase().includes(t)) : all).slice(0, 200);
+        rows = [{ label: cfg.all, cls: "clear", act: done(() => { input.value = ""; hide(); }) }].concat(list.map(v => ({
+          label: v,
+          act: done(() => { input.value = v; if (cfg.drill && tab === "state") { active = -1; paint(); } else hide(); }),
+        })));
+      }
+      active = Math.min(active, rows.length - 1);
       drop.innerHTML =
         (cfg.tabs ? `<div class="tabs">${cfg.tabs.map(x =>
           `<button type="button" data-tab="${x.id}" aria-pressed="${x.id === tab}">${x.label}</button>`).join("")}</div>` : "") +
-        `<div class="opts"><div class="opt clear" data-i="-1">${cfg.all}</div>` +
-        (shown.length ? shown.map((v, i) => `<div class="opt${i === active ? " on" : ""}" data-i="${i}">${esc(v)}</div>`).join("")
-          : `<div class="none">${cfg.none || "No match"}</div>`) + "</div>";
+        (heading ? `<div class="head">${esc(heading)}</div>` : "") +
+        `<div class="opts">` + rows.map((r, i) =>
+          `<div class="opt ${r.cls || ""}${i === active ? " on" : ""}" data-i="${i}">${esc(r.label)}</div>`).join("") +
+        (rows.length === 1 ? `<div class="none">${cfg.none || "No match"}</div>` : "") + "</div>";
     }
     const show = () => { paint(); drop.hidden = false; };
-    const hide = () => { drop.hidden = true; active = -1; };
-    const pick = i => { input.value = i < 0 ? "" : shown[i]; hide(); cfg.onChange(); };
     input.addEventListener("focus", show);
     input.addEventListener("click", show);
     input.addEventListener("input", () => { active = -1; show(); cfg.onChange(); });
     input.addEventListener("keydown", e => {
       if (e.key === "ArrowDown" || e.key === "ArrowUp") {
         e.preventDefault(); if (drop.hidden) show();
-        active = Math.max(0, Math.min(shown.length - 1, active + (e.key === "ArrowDown" ? 1 : -1))); paint();
+        active = Math.max(0, Math.min(rows.length - 1, active + (e.key === "ArrowDown" ? 1 : -1))); paint();
         const on = drop.querySelector(".opt.on"); if (on) on.scrollIntoView({ block: "nearest" });
-      } else if (e.key === "Enter") { e.preventDefault(); if (active >= 0) pick(active); else hide(); }
+      } else if (e.key === "Enter") { e.preventDefault(); if (active >= 0) rows[active].act(); else hide(); }
       else if (e.key === "Escape") hide();
     });
     drop.addEventListener("mousedown", e => {
       e.preventDefault();                                   // keep the cursor in the text box
+      e.stopPropagation();                                  // the list is repainted, so do not treat this as a click outside
       const t = e.target.closest("[data-tab]"), o = e.target.closest(".opt");
       if (t) { tab = t.dataset.tab; active = -1; paint(); cfg.onChange(); }
-      else if (o) pick(+o.dataset.i);
+      else if (o) rows[+o.dataset.i].act();
     });
     document.addEventListener("mousedown", e => { if (!root.contains(e.target)) hide(); });
     return { text: txt, tab: () => tab, exact: isExact };
@@ -83,7 +104,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const locationBox = makeCombo(el("c-location"), {
     all: "All locations", none: "No state or city matches",
     tabs: [{ id: "state", label: "States" }, { id: "city", label: "Cities" }],
-    items: tab => tab === "state" ? stateNames : cityLabels, onChange: () => render() });
+    items: tab => tab === "state" ? stateNames : cityLabels, drill: t => citiesOfState[t] || [], onChange: () => render() });
   const daysBox = makeCombo(el("c-days"), { all: "Any number of days", items: () => DAY_CHOICES, onChange: () => render() });
 
   function matchLocation(r) {

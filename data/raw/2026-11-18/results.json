@@ -1,0 +1,27 @@
+[
+  {
+    "name": "betterment",
+    "ok": true,
+    "count": 25
+  },
+  {
+    "name": "altruist",
+    "ok": true,
+    "count": 71
+  },
+  {
+    "name": "sofi",
+    "ok": true,
+    "count": 51
+  },
+  {
+    "name": "robinhood",
+    "ok": true,
+    "count": 165
+  },
+  {
+    "name": "savvy",
+    "ok": true,
+    "count": 33
+  }
+]

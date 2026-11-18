@@ -1,6 +1,6 @@
 // Online: always try the network (so data is fresh) and keep a copy.
 // Offline: serve the last copy, marked with an x-from-cache header so the page can say so.
-const CACHE = "job-watcher-v1";
+const CACHE = "job-watcher-v2";
 const SHELL = [
   "./", "index.html", "browse.html", "market.html", "manifest.webmanifest",
   "assets/style.css", "assets/common.js", "assets/today.js", "assets/browse.js",
@@ -24,7 +24,7 @@ self.addEventListener("fetch", e => {
   e.respondWith((async () => {
     const cache = await caches.open(CACHE);
     try {
-      const res = await fetch(req);
+      const res = await fetch(req, { cache: "no-cache" });   // skip the browser HTTP cache too
       if (res.ok) cache.put(req, res.clone());
       return res;
     } catch (err) {

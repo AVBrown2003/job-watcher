@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/AVBrown2003/job-watcher/actions/workflows/tests.yml/badge.svg)](https://github.com/AVBrown2003/job-watcher/actions/workflows/tests.yml)
 
-A tool that watches the job market for **financial advisor** roles. Every day GitHub Actions pulls the open postings from a handful of employers, compares them with the day before, records what is new and what is gone, opens a GitHub Issue with the changes, and publishes the result to a website.
+A tool that watches the job market for **financial advisor** roles. Every day GitHub Actions pulls the open postings from 16 employers, compares them with the day before, records what is new and what is gone, opens a GitHub Issue with the changes, and publishes the result to a website.
 
 - Live site: https://avbrown2003.github.io/job-watcher/
 - Daily issues: the repository's Issues tab (one per day, the previous day's is closed)
@@ -20,15 +20,28 @@ A second run on the same UTC day replaces that day's raw files and issue, so eac
 
 ## Sources
 
+16 employers on three applicant tracking systems. Every board is read as JSON from a public, no-login endpoint; no HTML page is read.
+
 | Source name | Employer | Applicant tracking system | Endpoint |
 |---|---|---|---|
 | `betterment` | Betterment | Greenhouse | `boards-api.greenhouse.io/v1/boards/betterment/jobs` |
 | `altruist` | Altruist | Greenhouse | `boards-api.greenhouse.io/v1/boards/altruist/jobs` |
 | `sofi` | SoFi | Greenhouse | `boards-api.greenhouse.io/v1/boards/sofi/jobs` |
 | `robinhood` | Robinhood | Greenhouse | `boards-api.greenhouse.io/v1/boards/robinhood/jobs` |
+| `vestwell` | Vestwell | Greenhouse | `boards-api.greenhouse.io/v1/boards/vestwell/jobs` |
+| `chime` | Chime | Greenhouse | `boards-api.greenhouse.io/v1/boards/chime/jobs` |
+| `affirm` | Affirm | Greenhouse | `boards-api.greenhouse.io/v1/boards/affirm/jobs` |
+| `brex` | Brex | Greenhouse | `boards-api.greenhouse.io/v1/boards/brex/jobs` |
+| `coinbase` | Coinbase | Greenhouse | `boards-api.greenhouse.io/v1/boards/coinbase/jobs` |
+| `upstart` | Upstart | Greenhouse | `boards-api.greenhouse.io/v1/boards/upstart/jobs` |
+| `mercury` | Mercury | Greenhouse | `boards-api.greenhouse.io/v1/boards/mercury/jobs` |
 | `savvy` | Savvy Wealth | Ashby | `api.ashbyhq.com/posting-api/job-board/savvy` |
+| `plaid` | Plaid | Ashby | `api.ashbyhq.com/posting-api/job-board/plaid` |
+| `nerdwallet` | NerdWallet | Ashby | `api.ashbyhq.com/posting-api/job-board/nerdwallet` |
+| `acorns` | Acorns | Ashby | `api.ashbyhq.com/posting-api/job-board/acorns` |
+| `wealthfront` | Wealthfront | Lever | `api.lever.co/v0/postings/wealthfront?mode=json` |
 
-Every posting the board returns is kept, not only ones in the role. `job_watcher/sources.py` also has a converter for Lever boards, ready for a future source.
+Every posting the board returns is kept, not only ones in the role. The largest board returns a few hundred postings, far below 5,000, so no board is requested with a search term. (If a board ever passes 5,000 postings, it would be requested with a search term, which would be named here.)
 
 ## Title rule (in role or not)
 

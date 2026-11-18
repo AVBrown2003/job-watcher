@@ -55,3 +55,11 @@ def test_every_source_has_a_converter_and_unique_name():
 
 def test_compress_is_deterministic():
     assert sources.compress(b'{"a":1}') == sources.compress(b'{"a":1}')
+
+
+def test_at_least_fifteen_employers_with_json_endpoints():
+    employers = {s.employer for s in sources.SOURCES}
+    assert len(employers) >= 15
+    for s in sources.SOURCES:
+        assert s.url.startswith("https://")
+        assert s.ats in {"Greenhouse", "Ashby", "Lever"}

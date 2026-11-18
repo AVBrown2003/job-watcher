@@ -20,7 +20,7 @@ A second run on the same UTC day replaces that day's raw files and issue, so eac
 
 ## Sources
 
-16 employers on three applicant tracking systems. Every board is read as JSON from a public, no-login endpoint; no HTML page is read.
+18 employers on four applicant tracking systems. Every board is read as JSON from a public, no-login endpoint; no HTML page is read.
 
 | Source name | Employer | Applicant tracking system | Endpoint |
 |---|---|---|---|
@@ -40,8 +40,12 @@ A second run on the same UTC day replaces that day's raw files and issue, so eac
 | `nerdwallet` | NerdWallet | Ashby | `api.ashbyhq.com/posting-api/job-board/nerdwallet` |
 | `acorns` | Acorns | Ashby | `api.ashbyhq.com/posting-api/job-board/acorns` |
 | `wealthfront` | Wealthfront | Lever | `api.lever.co/v0/postings/wealthfront?mode=json` |
+| `raymondjames` | Raymond James | Workday | `POST raymondjames.wd1.myworkdayjobs.com/wday/cxs/raymondjames/RaymondJamesCareers/jobs` |
+| `merrill` | Merrill Lynch (Bank of America) | Workday | `POST ghr.wd1.myworkdayjobs.com/wday/cxs/ghr/lateral-us/jobs`, search term **Merrill** |
 
-Every posting the board returns is kept, not only ones in the role. The largest board returns a few hundred postings, far below 5,000, so no board is requested with a search term. (If a board ever passes 5,000 postings, it would be requested with a search term, which would be named here.)
+Every posting the board returns is kept, not only ones in the role. Workday boards return 20 postings per request, so the tool pages through all of them. No board is near 5,000 postings. Merrill Lynch is a part of Bank of America and has no board of its own, so its postings are the Bank of America lateral-hiring board (about 2,000 postings) requested with the search term **Merrill**; that is the only board requested with a search term. Workday gives only a relative "posted N days ago", so `posted_date` is empty for the two Workday sources.
+
+**Not watched:** Edward Jones (its careers site runs on SmashFly and has no JSON board we could read without scraping HTML) and Stephens Inc. (no public JSON board found).
 
 ## Title rule (in role or not)
 

@@ -99,35 +99,60 @@
   layer.className = "desk-items";
   layer.setAttribute("aria-hidden", "true");
 
-  function place() {
+  var slots = [], scale = 1, mounted = {}, queued = false;
+
+  // work out where every item goes down the page (nothing is drawn yet)
+  function layout() {
     var vw = document.documentElement.clientWidth;
     var margin = (vw - PAPER) / 2;
+    slots = [];
     layer.innerHTML = "";
+    mounted = {};
     if (margin < 70) return;                                   // no desk showing on narrow screens
     var height = document.body.offsetHeight + 62;
     layer.style.height = height + "px";
-    var scale = Math.min(1, (margin + 150) / 450);             // real size on wide screens, smaller as the desk narrows
-    var n = 0;
-    for (var y = 360; y < height - 120; y += 560, n++) {
+    scale = Math.min(1, (margin + 150) / 450);                 // real size on wide screens, smaller as the desk narrows
+    for (var n = 0, y = 360; y < height - 120; y += 560, n++) {
       var it = ITEMS[n % ITEMS.length];
-      var left = n % 2 === 0;
-      var cx = left ? margin / 2 : vw - margin / 2;
+      var cx = n % 2 === 0 ? margin / 2 : vw - margin / 2;
       cx += ((n * 37) % 41 - 20) * (margin / 300);             // small repeatable jitter
-      var cy = y + ((n * 53) % 110);
-      var el = document.createElement("div");
-      el.className = "desk-item";
-      el.style.left = (cx - it.w / 2) + "px";
-      el.style.top = (cy - it.h / 2) + "px";
-      el.style.transform = "rotate(" + (it.angle + ((n * 17) % 9 - 4)) + "deg) scale(" + scale + ")";
-      el.innerHTML = it.make(n);
-      layer.appendChild(el);
+      slots.push({ it: it, x: cx - it.w / 2, y: y + ((n * 53) % 110) - it.h / 2, angle: it.angle + ((n * 17) % 9 - 4) });
     }
+    show();
   }
+
+  // only the items near the window exist, so a very long list does not slow the page down
+  function show() {
+    queued = false;
+    var top = window.scrollY - 900, bottom = window.scrollY + window.innerHeight + 900;
+    slots.forEach(function (s, n) {
+      var near = s.y + 700 > top && s.y < bottom;
+      if (near && !mounted[n]) {
+        var el = document.createElement("div");
+        el.className = "desk-item";
+        el.style.left = s.x + "px";
+        el.style.top = s.y + "px";
+        el.style.transform = "rotate(" + s.angle + "deg) scale(" + scale + ")";
+        el.innerHTML = s.it.make(n);
+        layer.appendChild(el);
+        mounted[n] = el;
+      } else if (!near && mounted[n]) {
+        layer.removeChild(mounted[n]);
+        delete mounted[n];
+      }
+    });
+  }
+  function onScroll() { if (!queued) { queued = true; requestAnimationFrame(show); } }
 
   document.addEventListener("DOMContentLoaded", function () {
     document.documentElement.insertBefore(layer, document.body);
-    place();
-    if (window.ResizeObserver) new ResizeObserver(place).observe(document.body);
-    window.addEventListener("resize", place);
+    layout();
+    var last = 0;
+    if (window.ResizeObserver) new ResizeObserver(function () {
+      var h = document.body.offsetHeight;
+      if (Math.abs(h - last) > 40) { last = h; layout(); }      // the page grew or shrank
+    }).observe(document.body);
+    window.addEventListener("resize", layout);
+    window.addEventListener("scroll", onScroll, { passive: true });
   });
 })();

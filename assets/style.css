@@ -317,3 +317,6 @@ body { z-index: 1; box-shadow: 0 0 0 3px #2a1f1a, 6px 9px 0 rgba(60, 30, 10, .38
 .drop .head { padding: 3px 12px; font-size: 1.05rem; font-weight: 700; color: var(--muted); background: #fff3a3; border-bottom: 1px dashed var(--ink); }
 .drop .opt.keep { font-weight: 700; color: var(--ink); background: rgba(255, 230, 109, .35); }
 .drop .head.dim { opacity: .4; }
+.list li.more { text-align: center; padding: 10px; }
+.list li.more button { font: inherit; font-size: 1.3rem; font-weight: 700; color: var(--ink); background: #fff3a3; border: 2px solid var(--ink); border-radius: 10px 6px 11px 7px; padding: 4px 22px; cursor: pointer; }
+.list li.more button:hover { background: #ffe66d; }

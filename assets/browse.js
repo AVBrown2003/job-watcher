@@ -138,7 +138,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     return true;
   }
 
-  function render() {
+  const PAGE = 100;
+  let shown = PAGE;                                  // how many postings are on the page
+  function render(keepShown) {
+    if (keepShown !== true) shown = PAGE;           // a new filter starts again from the top
     const emp = employerBox.text();
     const q = el("q").value.trim().toLowerCase();
     let pool = state.scope === "star" ? rows.filter(r => stars.has(r.posting_id)) : open;
@@ -154,7 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     el("count").textContent = `${list.length} posting${list.length === 1 ? "" : "s"}` +
       (state.scope === "role" ? " in your role" : "");
-    el("results").innerHTML = list.length ? list.map(r => {
+    el("results").innerHTML = list.length ? list.slice(0, shown).map(r => {
       const starred = stars.has(r.posting_id);
       return `<li class="row">
         <button class="star" type="button" data-id="${esc(r.posting_id)}" aria-pressed="${starred}"
@@ -167,17 +170,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
         <a class="apply" href="${esc(r.url)}" target="_blank" rel="noopener">Apply</a>
       </li>`;
-    }).join("") : `<li class="empty">${state.scope === "star" ? "Nothing starred yet. Star a posting to save it here." :
+    }).join("") + (list.length > shown ? `<li class="more"><button type="button" id="more">Show ${Math.min(PAGE, list.length - shown)} more (${list.length - shown} not shown yet)</button></li>` : "")
+      : `<li class="empty">${state.scope === "star" ? "Nothing starred yet. Star a posting to save it here." :
       "No postings match. Try switching to All postings or clearing a filter."}</li>`;
   }
 
   el("results").addEventListener("click", e => {
+    if (e.target.closest("#more")) { shown += PAGE; render(true); return; }
     const btn = e.target.closest(".star");
     if (!btn) return;
     const id = btn.dataset.id;
     stars.has(id) ? stars.delete(id) : stars.add(id);
     saveStars(stars);
-    render();
+    render(true);
   });
   el("scope").addEventListener("click", e => {
     const b = e.target.closest("button");
@@ -186,6 +191,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     el("scope").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
     render();
   });
-  ["q", "sort"].forEach(id => el(id).addEventListener("input", render));
+  ["q", "sort"].forEach(id => el(id).addEventListener("input", () => render()));
   render();
 });

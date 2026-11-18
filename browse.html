@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browse - Job Watcher</title>
+<meta name="theme-color" content="#16384f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/common.js" defer></script>
+<script src="assets/browse.js" defer></script>
+</head>
+<body>
+<main>
+  <h1>Browse open postings</h1>
+  <p class="lede">Show postings in your role (financial advisor) or everything the employers' boards list.</p>
+
+  <div>
+    <div class="note" style="margin-bottom:3px">Show</div>
+    <div class="seg" id="scope">
+      <button type="button" data-v="role" aria-pressed="true">In my role</button>
+      <button type="button" data-v="all" aria-pressed="false">All postings</button>
+      <button type="button" data-v="star" aria-pressed="false">★ Shortlist</button>
+    </div>
+  </div>
+
+  <div class="controls">
+    <label>Employer <select id="f-employer"></select></label>
+    <label>Location <select id="f-location"></select></label>
+    <label>Days open
+      <select id="f-days">
+        <option value="">Any</option>
+        <option value="7">7 or fewer</option>
+        <option value="30">30 or fewer</option>
+        <option value="31+">More than 30</option>
+      </select>
+    </label>
+    <label>Search titles <input type="search" id="q" placeholder="e.g. advisor"></label>
+    <label>Sort by first seen
+      <select id="sort"><option value="new">Newest first</option><option value="old">Oldest first</option></select>
+    </label>
+  </div>
+
+  <div class="count" id="count"></div>
+  <ul class="list" id="results"></ul>
+  <p class="note">Days open counts from the posting's own posted date when the board gives one, otherwise from the day this tool first saw it. Your shortlist is saved in this browser.</p>
+</main>
+<footer>Stars are stored on this device only.</footer>
+</body>
+</html>

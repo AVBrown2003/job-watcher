@@ -1,4 +1,4 @@
-"""Draw the app icons (PNG, no libraries): a black square with a gold magnifier.
+"""Draw the app icons (PNG, no libraries): a blue square with a white magnifier.
 
     python make_icons.py
 """
@@ -6,7 +6,7 @@ import struct
 import zlib
 from pathlib import Path
 
-NAVY, GOLD = (0, 0, 0), (212, 175, 55)
+NAVY, GOLD = (29, 78, 216), (255, 255, 255)
 
 
 def pixel(x, y, n):

@@ -126,3 +126,9 @@ footer { color: var(--muted); font-size: .8rem; max-width: 1040px; margin: 0 aut
   .apply { margin-left: 40px; }
   section.finding { padding: 4px 14px 16px; }
 }
+
+/* sources table: the first column takes each company's colors */
+td.src { font-weight: 700; white-space: nowrap; }
+td.src > span:last-child { vertical-align: middle; }
+td.src .logo { display: inline-block; width: 26px; height: 26px; padding: 3px; margin-right: 10px; border-radius: 7px; background: #fff; vertical-align: middle; object-fit: contain; }
+tbody tr:hover td.src { filter: brightness(1.06); }

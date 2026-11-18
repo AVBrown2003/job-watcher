@@ -74,3 +74,47 @@ document.addEventListener("DOMContentLoaded", () => {
   renderNav();
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 });
+
+// Display names, logo domains and (approximate) brand colors for each source.
+const BRANDS = {
+  betterment:   { label: "Betterment",    domain: "betterment.com",   color: "#0A5BD3" },
+  altruist:     { label: "Altruist",      domain: "altruist.com",     color: "#171A2B" },
+  sofi:         { label: "SoFi",          domain: "sofi.com",         color: "#00A0DC" },
+  robinhood:    { label: "Robinhood",     domain: "robinhood.com",    color: "#00C805" },
+  vestwell:     { label: "Vestwell",      domain: "vestwell.com",     color: "#1F3A5F" },
+  chime:        { label: "Chime",         domain: "chime.com",        color: "#1EC677" },
+  affirm:       { label: "Affirm",        domain: "affirm.com",       color: "#4A4AF4" },
+  brex:         { label: "Brex",          domain: "brex.com",         color: "#F15A29" },
+  coinbase:     { label: "Coinbase",      domain: "coinbase.com",     color: "#0052FF" },
+  upstart:      { label: "Upstart",       domain: "upstart.com",      color: "#00A9E0" },
+  mercury:      { label: "Mercury",       domain: "mercury.com",      color: "#5266EB" },
+  savvy:        { label: "Savvy Wealth",  domain: "savvywealth.com",  color: "#1D4ED8" },
+  plaid:        { label: "Plaid",         domain: "plaid.com",        color: "#111111" },
+  nerdwallet:   { label: "NerdWallet",    domain: "nerdwallet.com",   color: "#00A36C" },
+  acorns:       { label: "Acorns",        domain: "acorns.com",       color: "#6BBE45" },
+  wealthfront:  { label: "Wealthfront",   domain: "wealthfront.com",  color: "#4840BB" },
+  raymondjames: { label: "Raymond James", domain: "raymondjames.com", color: "#005B94" },
+  merrill:      { label: "Merrill Lynch", domain: "ml.com",           color: "#012169" },
+};
+
+// Name as shown to people: "raymondjames" -> "Raymond James".
+function sourceLabel(name) {
+  const b = BRANDS[name];
+  return b ? b.label : name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+// Black or white text, whichever reads better on a background color.
+function textOn(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  const lum = (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255;
+  return lum > 0.6 ? "#111" : "#fff";
+}
+
+// The source cell: logo on a white chip, name, on the company's color.
+function sourceCell(name) {
+  const b = BRANDS[name] || { label: sourceLabel(name), domain: "", color: "#333333" };
+  const logo = b.domain
+    ? `<img class="logo" alt="" loading="lazy" src="https://www.google.com/s2/favicons?domain=${b.domain}&sz=64" onerror="this.style.visibility='hidden'">`
+    : '<span class="logo"></span>';
+  return `<td class="src" style="background:${b.color};color:${textOn(b.color)}">${logo}<span>${esc(b.label)}</span></td>`;
+}

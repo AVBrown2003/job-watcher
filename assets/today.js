@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("n-removed").textContent = status.removed_today;
 
     document.getElementById("sources").innerHTML = status.sources.map(s =>
-      `<tr><td>${esc(s.name)}</td><td><span class="${s.ok ? "ok" : "fail"}">${s.ok ? "OK" : "Failed"}</span></td><td>${s.count}</td></tr>`).join("");
+      `<tr>${sourceCell(s.name)}<td><span class="${s.ok ? "ok" : "fail"}">${s.ok ? "OK" : "Failed"}</span></td><td>${s.count}</td></tr>`).join("");
 
     const item = r => `<li><span class="${r.in_role ? "" : "sub"}">${r.in_role ? '<span class="pill">YOUR ROLE</span>' : ""}</span>` +
       `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a>` +

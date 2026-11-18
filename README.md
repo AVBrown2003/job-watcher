@@ -96,7 +96,12 @@ The site is installable (`manifest.webmanifest`, `sw.js`). Online it loads fresh
 | `job_watcher/role.py` | the title rule |
 | `job_watcher/build.py` | builds `data/history.csv` from the raw files |
 | `job_watcher/pipeline.py` | the daily run: fetch, build, status, GitHub Issue |
-| `tests/` | pytest tests: source conversion, title rule, first-seen/last-seen/removed logic, pipeline |
+| `job_watcher/__init__.py` | marks `job_watcher` as a Python package |
+| `tests/test_convert.py` | tests each source type's conversion to the common columns (Greenhouse, Ashby, Lever, Workday), Workday paging and search term, and the 15+ employer requirement |
+| `tests/test_role.py` | tests the title rule |
+| `tests/test_build.py` | tests first-seen, last-seen, removed and re-opened logic, and that the build is reproducible |
+| `tests/test_pipeline.py` | tests the status counts, the issue text, and that a failed source or a second run behaves correctly |
+| `tests/conftest.py` | lets the tests import the `job_watcher` package |
 | `.github/workflows/daily.yml` | daily schedule: runs the pipeline and commits `data/` |
 | `.github/workflows/tests.yml` | runs pytest on every push |
 | `index.html`, `browse.html`, `market.html` | the three pages |
@@ -107,6 +112,9 @@ The site is installable (`manifest.webmanifest`, `sw.js`). Online it loads fresh
 | `manifest.webmanifest`, `sw.js` | installable app and offline support |
 | `assets/icon-192.png`, `assets/icon-512.png`, `make_icons.py` | app icons and the script that draws them |
 | `pyproject.toml`, `uv.lock` | project settings (pytest for development) |
+| `.gitignore` | keeps caches and virtual environments out of the repository |
+| `.gitattributes` | keeps line endings as LF so data files match across machines |
+| `README.md` | this file |
 
 ## Run it yourself
 

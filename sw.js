@@ -1,9 +1,9 @@
 // Online: always try the network (so data is fresh) and keep a copy.
 // Offline: serve the last copy, marked with an x-from-cache header so the page can say so.
-const CACHE = "job-watcher-v16";
+const CACHE = "job-watcher-v18";
 const SHELL = [
   "./", "index.html", "browse.html", "market.html", "manifest.webmanifest",
-  "assets/style.css", "assets/turn.js", "assets/desk.js", "assets/common.js", "assets/today.js", "assets/browse.js",
+  "assets/style.css", "assets/turn.js", "assets/desk.js", "assets/places.js", "assets/common.js", "assets/today.js", "assets/browse.js",
   "assets/market.js", "assets/charts.js", "assets/icon-192.png", "assets/icon-512.png",
   "data/status.json", "data/history.csv",
 ];

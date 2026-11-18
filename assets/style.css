@@ -296,3 +296,21 @@ body { z-index: 1; box-shadow: 0 0 0 3px #2a1f1a, 6px 9px 0 rgba(60, 30, 10, .38
 .desk-items { position: absolute; top: 0; left: 0; right: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .desk-item { position: absolute; filter: drop-shadow(7px 11px 8px rgba(45, 22, 6, .45)); }
 .desk-item svg { display: block; }
+
+/* filter text boxes with a drop-down of suggestions */
+.controls .field { display: flex; flex-direction: column; gap: 4px; position: relative; min-width: 0; }
+.controls .flabel { font-size: 1.1rem; font-weight: 700; color: var(--ink); line-height: 1.1; }
+.combo { position: relative; }
+.combo-in, #q { width: 100%; font: inherit; font-size: 1.2rem; color: var(--ink); caret-color: var(--ink); padding: 4px 8px; border: 0; border-bottom: 2px solid var(--ink); border-radius: 0; background: rgba(255, 246, 179, .55); }
+.combo-in::placeholder, #q::placeholder { color: #7c89b8; opacity: 1; }
+.combo-in:focus, #q:focus { outline: none; background: #fff3a3; box-shadow: 0 3px 0 -1px #ffe66d; }
+.drop { position: absolute; left: 0; top: calc(100% + 3px); width: max(100%, 260px); max-width: 92vw; z-index: 30; background: #fffdf2; border: 2px solid var(--ink); border-radius: 6px 10px 6px 9px; box-shadow: 4px 6px 0 rgba(28, 47, 120, .18); line-height: 1.2; }
+.drop[hidden] { display: none; }
+.drop .tabs { display: flex; border-bottom: 2px solid var(--ink); }
+.drop .tabs button { flex: 1; font: inherit; font-size: 1.25rem; font-weight: 700; background: transparent; color: var(--muted); border: 0; padding: 4px 10px; cursor: pointer; }
+.drop .tabs button[aria-pressed=true] { background: #ffe66d; color: var(--ink); }
+.drop .opts { max-height: 250px; overflow-y: auto; }
+.drop .opt { padding: 4px 12px; font-size: 1.2rem; cursor: pointer; border-bottom: 1px dashed var(--line); }
+.drop .opt.clear { color: var(--muted); font-style: italic; }
+.drop .opt:hover, .drop .opt.on { background: #fff3a3; }
+.drop .none { padding: 6px 12px; color: var(--muted); font-size: 1.1rem; }

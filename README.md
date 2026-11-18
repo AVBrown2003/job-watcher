@@ -87,7 +87,7 @@ History rules, applied day by day for each source that has a raw file that day:
 Three pages that load the two data files in the browser and compute everything there:
 
 - **Today** (`index.html`): last run time, status of every source, sorted by postings listed (each shown with its capitalized name, logo and company color, and a green check or red X), the four counts, and the new and removed postings of the latest run.
-- **Browse** (`browse.html`): open postings, in-role or all, with filters (employer, location, days open), title search, sort by first-seen date, an apply link, and a star to save a posting to a shortlist that stays in the browser.
+- **Browse** (`browse.html`): open postings, in-role or all, with filters (employer, location, days open), each a text box with suggestions (location has States and Cities tabs, with street addresses left out), title search, sort by first-seen date, an apply link, and a star to save a posting to a shortlist that stays in the browser.
 - **Market** (`market.html`): six findings computed from the history (new per day, removed per day, open per employer, days open and its median, share removed within seven days, top locations).
 
 The site is installable (`manifest.webmanifest`, `sw.js`). Online it loads fresh data; offline it opens and shows the last data it loaded.
@@ -113,6 +113,7 @@ The site is installable (`manifest.webmanifest`, `sw.js`). Online it loads fresh
 | `assets/common.js` | navigation bar, data loading, CSV parser |
 | `assets/today.js`, `assets/browse.js`, `assets/market.js` | page logic |
 | `assets/charts.js` | small SVG chart helpers |
+| `assets/places.js` | turns messy location text into plain states and cities for the Location filter |
 | `assets/desk.js` | the cartoon desk items (pencils, tacks, eraser, rubber-band ball, paper airplane) beside the notepad |
 | `assets/turn.js` | tells the page-turn animation which way to turn |
 | `manifest.webmanifest`, `sw.js` | installable app and offline support |

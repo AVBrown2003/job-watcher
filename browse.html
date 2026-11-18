@@ -8,11 +8,12 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/icon-192.png">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
-<script src="assets/turn.js?v=16"></script>
-<link rel="stylesheet" href="assets/style.css?v=16">
-<script src="assets/common.js?v=16" defer></script>
-<script src="assets/desk.js?v=16" defer></script>
-<script src="assets/browse.js?v=16" defer></script>
+<script src="assets/turn.js?v=18"></script>
+<link rel="stylesheet" href="assets/style.css?v=18">
+<script src="assets/common.js?v=18" defer></script>
+<script src="assets/desk.js?v=18" defer></script>
+<script src="assets/places.js?v=18" defer></script>
+<script src="assets/browse.js?v=18" defer></script>
 </head>
 <body>
 <header class="hero"><div class="wrap">
@@ -32,17 +33,13 @@
   </div>
 
   <div class="controls">
-    <label>Employer <select id="f-employer"></select></label>
-    <label>Location <select id="f-location"></select></label>
-    <label>Days open
-      <select id="f-days">
-        <option value="">Any</option>
-        <option value="7">7 or fewer</option>
-        <option value="30">30 or fewer</option>
-        <option value="31+">More than 30</option>
-      </select>
-    </label>
-    <label>Search titles <input type="search" id="q" placeholder="e.g. advisor"></label>
+    <div class="field"><span class="flabel">Employer</span>
+      <div class="combo" id="c-employer"><input class="combo-in" type="text" autocomplete="off" spellcheck="false" placeholder="Type to search..." aria-label="Employer"><div class="drop" hidden></div></div></div>
+    <div class="field"><span class="flabel">Location</span>
+      <div class="combo" id="c-location"><input class="combo-in" type="text" autocomplete="off" spellcheck="false" placeholder="State or city..." aria-label="Location"><div class="drop" hidden></div></div></div>
+    <div class="field"><span class="flabel">Days open</span>
+      <div class="combo" id="c-days"><input class="combo-in" type="text" autocomplete="off" spellcheck="false" placeholder="Type a number..." aria-label="Days open"><div class="drop" hidden></div></div></div>
+    <label>Search titles <input type="text" id="q" autocomplete="off" spellcheck="false" placeholder="Type a word, e.g. advisor"></label>
     <label>Sort by first seen
       <select id="sort"><option value="new">Newest first</option><option value="old">Oldest first</option></select>
     </label>

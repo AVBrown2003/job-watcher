@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Market - Job Watcher</title>
+<meta name="theme-color" content="#16384f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/common.js" defer></script>
+<script src="assets/charts.js" defer></script>
+<script src="assets/market.js" defer></script>
+</head>
+<body>
+<main>
+  <h1>The market so far</h1>
+  <p class="lede" id="intro">Loading the history...</p>
+
+  <section class="finding">
+    <h2 id="h1">New postings per day</h2>
+    <p id="p1"></p><div class="chart" id="c1"></div>
+  </section>
+  <section class="finding">
+    <h2 id="h2">Removed postings per day</h2>
+    <p id="p2"></p><div class="chart" id="c2"></div>
+  </section>
+  <section class="finding">
+    <h2 id="h3">Open postings per employer</h2>
+    <p id="p3"></p><div class="chart" id="c3"></div>
+  </section>
+  <section class="finding">
+    <h2 id="h4">Days open</h2>
+    <p id="p4"></p><div class="chart" id="c4"></div>
+  </section>
+  <section class="finding">
+    <h2 id="h5">Share removed within seven days</h2>
+    <p id="p5"></p><div class="chart" id="c5"></div>
+  </section>
+  <section class="finding">
+    <h2 id="h6">Top locations</h2>
+    <p id="p6"></p><div class="chart" id="c6"></div>
+  </section>
+  <p class="note">Every number on this page is computed in your browser from data/history.csv. Postings already open when the tool first looked at a board (first run) have an unknown start date, so they are left out of the new-per-day, days-open and seven-day numbers.</p>
+</main>
+<footer>Page recomputes as the history grows.</footer>
+</body>
+</html>

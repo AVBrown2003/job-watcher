@@ -271,3 +271,11 @@ section.finding h2 { text-decoration: none; background: linear-gradient(transpar
 /* going back (Market > Browse > Today): the previous page turns back over from the left */
 :root:active-view-transition-type(back)::view-transition-old(root) { transform-origin: 50% 50%; z-index: 1; animation-name: page-under; animation-direction: reverse; }
 :root:active-view-transition-type(back)::view-transition-new(root) { transform-origin: 0 55%; z-index: 2; animation-name: page-turn; animation-direction: reverse; animation-timing-function: cubic-bezier(.3, .05, .55, 1); backface-visibility: hidden; }
+
+/* page headings on Post-It yellow */
+.hero h1 { display: inline-block; background: #fff3a3; padding: 2px 18px 4px; box-shadow: 3px 4px 0 rgba(28, 47, 120, .13); }
+.hero .lede { margin-top: 14px; }
+.hero .lede, .hero .lede strong { color: var(--ink); }
+.hero .lede { display: inline; background: #fff3a3; padding: 2px 12px; line-height: 40px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.hero .eyebrow, .hero h1 { display: table; }
+.hero h1 { margin-top: 10px; margin-bottom: 12px; }

@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/AVBrown2003/job-watcher/actions/workflows/tests.yml/badge.svg)](https://github.com/AVBrown2003/job-watcher/actions/workflows/tests.yml)
 
-A tool that watches the job market for **financial advisor** roles. Every day GitHub Actions pulls the open postings from 16 employers, compares them with the day before, records what is new and what is gone, opens a GitHub Issue with the changes, and publishes the result to a website.
+A tool that watches the job market for **financial advisor** roles. Every day GitHub Actions pulls the open postings from 22 employers, compares them with the day before, records what is new and what is gone, opens a GitHub Issue with the changes, and publishes the result to a website.
 
 - Live site: https://avbrown2003.github.io/job-watcher/
 - Daily issues: the repository's Issues tab (one per day, the previous day's is closed)
@@ -20,7 +20,7 @@ A second run on the same UTC day replaces that day's raw files and issue, so eac
 
 ## Sources
 
-18 employers on four applicant tracking systems. Every board is read as JSON from a public, no-login endpoint; no HTML page is read.
+22 employers on four applicant tracking systems. Every board is read as JSON from a public, no-login endpoint; no HTML page is read.
 
 | Source name | Employer | Applicant tracking system | Endpoint |
 |---|---|---|---|
@@ -42,8 +42,12 @@ A second run on the same UTC day replaces that day's raw files and issue, so eac
 | `wealthfront` | Wealthfront | Lever | `api.lever.co/v0/postings/wealthfront?mode=json` |
 | `raymondjames` | Raymond James | Workday | `POST raymondjames.wd1.myworkdayjobs.com/wday/cxs/raymondjames/RaymondJamesCareers/jobs` |
 | `merrill` | Merrill Lynch (Bank of America) | Workday | `POST ghr.wd1.myworkdayjobs.com/wday/cxs/ghr/lateral-us/jobs`, search term **Merrill** |
+| `morganstanley` | Morgan Stanley | Workday | `POST ms.wd5.myworkdayjobs.com/wday/cxs/ms/External/jobs` |
+| `lpl` | LPL Financial | Workday | `POST lplfinancial.wd1.myworkdayjobs.com/wday/cxs/lplfinancial/External/jobs` |
+| `wellsfargo` | Wells Fargo | Workday | `POST wf.wd1.myworkdayjobs.com/wday/cxs/wf/WellsFargoJobs/jobs` |
+| `fidelity` | Fidelity Investments | Workday | `POST fmr.wd1.myworkdayjobs.com/wday/cxs/fmr/FidelityCareers/jobs` |
 
-Every posting the board returns is kept, not only ones in the role. Workday boards return 20 postings per request, so the tool pages through all of them. No board is near 5,000 postings. Merrill Lynch is a part of Bank of America and has no board of its own, so its postings are the Bank of America lateral-hiring board (about 2,000 postings) requested with the search term **Merrill**; that is the only board requested with a search term. Workday gives only a relative "posted N days ago", so `posted_date` is empty for the two Workday sources.
+Every posting the board returns is kept, not only ones in the role. Workday boards return 20 postings per request, so the tool pages through all of them. No board is near 5,000 postings (the largest is Wells Fargo at about 1,500). Merrill Lynch is a part of Bank of America and has no board of its own, so its postings are the Bank of America lateral-hiring board (about 2,000 postings) requested with the search term **Merrill**; that is the only board requested with a search term. Workday gives only a relative "posted N days ago", so `posted_date` is empty for the Workday sources.
 
 **Not watched:** Edward Jones (its careers site runs on SmashFly and has no JSON board we could read without scraping HTML) and Stephens Inc. (no public JSON board found).
 
@@ -109,6 +113,8 @@ The site is installable (`manifest.webmanifest`, `sw.js`). Online it loads fresh
 | `assets/common.js` | navigation bar, data loading, CSV parser |
 | `assets/today.js`, `assets/browse.js`, `assets/market.js` | page logic |
 | `assets/charts.js` | small SVG chart helpers |
+| `assets/desk.js` | the cartoon desk items (pencils, tacks, eraser, rubber-band ball, paper airplane) beside the notepad |
+| `assets/turn.js` | tells the page-turn animation which way to turn |
 | `manifest.webmanifest`, `sw.js` | installable app and offline support |
 | `assets/icon-192.png`, `assets/icon-512.png`, `make_icons.py` | app icons and the script that draws them |
 | `pyproject.toml`, `uv.lock` | project settings (pytest for development) |

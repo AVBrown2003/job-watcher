@@ -114,9 +114,9 @@ class Source:
     search: str = ""   # Workday only: search term sent with every request
 
 
-def workday(name, employer, tenant, site, convert_site_base, search=""):
+def workday(name, employer, tenant, site, convert_site_base, search="", wd="wd1"):
     """A Workday board: POST to /wday/cxs/<tenant>/<site>/jobs, 20 postings per page."""
-    host = f"https://{tenant}.wd1.myworkdayjobs.com"
+    host = f"https://{tenant}.{wd}.myworkdayjobs.com"
     return Source(name, employer, "Workday", f"{host}/wday/cxs/{tenant}/{site}/jobs",
                   functools.partial(convert_workday, base=f"{host}/{site}"), search=search)
 
@@ -156,6 +156,10 @@ SOURCES = [
            "https://api.lever.co/v0/postings/wealthfront?mode=json", convert_lever),
     workday("raymondjames", "Raymond James", "raymondjames", "RaymondJamesCareers", None),
     workday("merrill", "Merrill Lynch (Bank of America)", "ghr", "lateral-us", None, search="Merrill"),
+    workday("morganstanley", "Morgan Stanley", "ms", "External", None, wd="wd5"),
+    workday("lpl", "LPL Financial", "lplfinancial", "External", None),
+    workday("wellsfargo", "Wells Fargo", "wf", "WellsFargoJobs", None),
+    workday("fidelity", "Fidelity Investments", "fmr", "FidelityCareers", None),
 ]
 
 BY_NAME = {s.name: s for s in SOURCES}

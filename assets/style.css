@@ -279,3 +279,20 @@ section.finding h2 { text-decoration: none; background: linear-gradient(transpar
 .hero .lede { display: inline; background: #fff3a3; padding: 2px 12px; line-height: 40px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .hero .eyebrow, .hero h1 { display: table; }
 .hero h1 { margin-top: 10px; margin-bottom: 12px; }
+
+/* wooden desk around the notepad (cartoon planks) */
+html {
+  position: relative;
+  background-color: #c98e55;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 217px, #5a3216 217px 221px),
+    repeating-linear-gradient(90deg, transparent 0 331px, rgba(90, 50, 22, .55) 331px 334px),
+    repeating-linear-gradient(90deg, rgba(255, 224, 170, .20) 0 70px, transparent 70px 140px, rgba(120, 66, 28, .16) 140px 190px, transparent 190px 260px),
+    repeating-linear-gradient(90deg, rgba(90, 50, 22, .14) 0 2px, transparent 2px 13px),
+    repeating-linear-gradient(90deg, rgba(255, 235, 200, .12) 0 1px, transparent 1px 7px);
+  background-attachment: scroll;
+}
+body { z-index: 1; box-shadow: 0 0 0 3px #2a1f1a, 6px 9px 0 rgba(60, 30, 10, .38), 0 22px 40px rgba(60, 30, 10, .35); }
+.desk-items { position: absolute; top: 0; left: 0; right: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.desk-item { position: absolute; filter: drop-shadow(5px 7px 0 rgba(60, 30, 10, .35)); }
+.desk-item svg { display: block; }

@@ -95,6 +95,10 @@ const BRANDS = {
   wealthfront:  { label: "Wealthfront",   domain: "wealthfront.com",  color: "#4840BB" },
   raymondjames: { label: "Raymond James", domain: "raymondjames.com", color: "#005B94" },
   merrill:      { label: "Merrill Lynch", domain: "ml.com",           color: "#012169" },
+  morganstanley:{ label: "Morgan Stanley", domain: "morganstanley.com", color: "#00539B" },
+  lpl:          { label: "LPL Financial", domain: "lpl.com",          color: "#00704A" },
+  wellsfargo:   { label: "Wells Fargo",   domain: "wellsfargo.com",   color: "#D71E28" },
+  fidelity:     { label: "Fidelity",      domain: "fidelity.com",     color: "#368727" },
 };
 
 // Name as shown to people: "raymondjames" -> "Raymond James".

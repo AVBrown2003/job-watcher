@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Browse - Job Watcher</title>
-<meta name="theme-color" content="#16384f">
+<meta name="theme-color" content="#0b3d2e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/icon-192.png">
 <link rel="apple-touch-icon" href="assets/icon-192.png">
@@ -13,10 +13,13 @@
 <script src="assets/browse.js" defer></script>
 </head>
 <body>
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Open positions</div>
+  <h1>Browse postings</h1>
+  <p class="lede">Postings in your role (financial advisor), or everything the employers' boards list. Star the ones you like.</p>
+</div></header>
 <main>
-  <h1>Browse open postings</h1>
-  <p class="lede">Show postings in your role (financial advisor) or everything the employers' boards list.</p>
-
+  <div class="panel">
   <div>
     <div class="note" style="margin-bottom:3px">Show</div>
     <div class="seg" id="scope">
@@ -41,6 +44,7 @@
     <label>Sort by first seen
       <select id="sort"><option value="new">Newest first</option><option value="old">Oldest first</option></select>
     </label>
+  </div>
   </div>
 
   <div class="count" id="count"></div>

@@ -1,6 +1,6 @@
 // Tiny SVG chart helpers (no libraries, so the site works offline).
 const SVGNS = "http://www.w3.org/2000/svg";
-const C = { all: "#16384f", role: "#b8860b", teal: "#1f7a6d", grid: "rgba(127,127,127,.25)" };
+const C = { all: "var(--c-all)", role: "var(--c-role)", teal: "var(--c-teal)", grid: "rgba(127,127,127,.25)" };
 
 function niceMax(v) {
   if (v <= 40) return Math.ceil(v / 4) * 4;   // whole-number gridlines
@@ -24,7 +24,7 @@ function vbars(target, labels, series, short = l => l.slice(5)) {
     const gx = L + slot * i + (slot - bw * series.length) / 2;
     series.forEach((s, k) => {
       const v = s.values[i], h = (H - T - B) * v / max;
-      svg += `<rect x="${gx + k * bw}" y="${H - B - h}" width="${bw - 1}" height="${h}" fill="${s.color}"><title>${lab}: ${v} ${s.name}</title></rect>`;
+      svg += `<rect x="${gx + k * bw}" y="${H - B - h}" width="${bw - 1}" height="${h}" style="fill:${s.color}"><title>${lab}: ${v} ${s.name}</title></rect>`;
     });
     if (i % step === 0) svg += `<text x="${L + slot * i + slot / 2}" y="${H - B + 14}" text-anchor="middle">${short(lab)}</text>`;
   });
@@ -42,7 +42,7 @@ function hbars(target, items, color) {
     const y = 5 + i * rowH, w = (W - L - R) * it.value / max;
     const lab = it.label.length > 30 ? it.label.slice(0, 29) + "…" : it.label;
     svg += `<text x="${L - 8}" y="${y + 15}" text-anchor="end">${esc(lab)}</text>` +
-      `<rect x="${L}" y="${y + 2}" width="${w}" height="${rowH - 8}" fill="${color || C.all}"><title>${esc(it.label)}: ${it.value}</title></rect>` +
+      `<rect x="${L}" y="${y + 2}" width="${w}" height="${rowH - 8}" style="fill:${color || C.all}"><title>${esc(it.label)}: ${it.value}</title></rect>` +
       `<text x="${L + w + 6}" y="${y + 15}">${it.value}</text>`;
   });
   target.innerHTML = svg + "</svg>";

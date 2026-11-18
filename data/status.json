@@ -1,8 +1,8 @@
 {
-  "run_time": "2026-11-18T01:29:57Z",
+  "run_time": "2026-11-18T01:39:30Z",
   "first_run_date": "2026-11-18",
   "days_with_success": 1,
-  "open": 1543,
+  "open": 2337,
   "new_today": 0,
   "removed_today": 0,
   "sources": [
@@ -85,6 +85,16 @@
       "name": "wealthfront",
       "ok": true,
       "count": 20
+    },
+    {
+      "name": "raymondjames",
+      "ok": true,
+      "count": 297
+    },
+    {
+      "name": "merrill",
+      "ok": true,
+      "count": 497
     }
   ]
 }

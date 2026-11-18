@@ -244,3 +244,16 @@ section.finding h2 { text-decoration: none; background: linear-gradient(transpar
 /* author name in the heading */
 .brand .by { font-size: 1.15rem; font-weight: 400; color: var(--muted); margin-left: 8px; align-self: flex-end; padding-bottom: 2px; white-space: nowrap; }
 @media (max-width: 560px) { .brand { margin-right: 6px; } .brand .by { display: none; } }
+
+/* page turn between Today, Browse and Market (browsers with cross-page view transitions) */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .65s; mix-blend-mode: normal; }
+::view-transition-old(root) { transform-origin: 0 50%; z-index: 2; animation-name: page-turn; animation-timing-function: cubic-bezier(.55, .1, .6, 1); animation-fill-mode: both; }
+::view-transition-new(root) { animation-name: page-under; animation-timing-function: ease-out; animation-fill-mode: both; }
+@keyframes page-turn {
+  0%   { transform: perspective(2200px) rotateY(0); filter: brightness(1); opacity: 1; }
+  70%  { transform: perspective(2200px) rotateY(-80deg); filter: brightness(.88); opacity: 1; }
+  100% { transform: perspective(2200px) rotateY(-100deg); filter: brightness(.8); opacity: 0; }
+}
+@keyframes page-under { from { opacity: .7; filter: brightness(.94); } to { opacity: 1; filter: brightness(1); } }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }

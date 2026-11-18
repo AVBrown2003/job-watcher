@@ -1,15 +1,15 @@
 {
-  "run_time": "2026-11-18T03:25:12Z",
+  "run_time": "2026-11-18T18:07:54Z",
   "first_run_date": "2026-11-18",
   "days_with_success": 1,
-  "open": 6156,
+  "open": 6177,
   "new_today": 0,
   "removed_today": 0,
   "sources": [
     {
       "name": "wellsfargo",
       "ok": true,
-      "count": 1454
+      "count": 1466
     },
     {
       "name": "morganstanley",
@@ -19,22 +19,22 @@
     {
       "name": "fidelity",
       "ok": true,
-      "count": 886
+      "count": 892
     },
     {
       "name": "merrill",
       "ok": true,
-      "count": 497
+      "count": 498
     },
     {
       "name": "lpl",
       "ok": true,
-      "count": 323
+      "count": 319
     },
     {
       "name": "raymondjames",
       "ok": true,
-      "count": 297
+      "count": 296
     },
     {
       "name": "brex",
@@ -44,17 +44,17 @@
     {
       "name": "coinbase",
       "ok": true,
-      "count": 257
+      "count": 256
     },
     {
       "name": "affirm",
       "ok": true,
-      "count": 221
+      "count": 227
     },
     {
       "name": "robinhood",
       "ok": true,
-      "count": 165
+      "count": 167
     },
     {
       "name": "plaid",
@@ -62,12 +62,12 @@
       "count": 142
     },
     {
-      "name": "chime",
+      "name": "upstart",
       "ok": true,
-      "count": 75
+      "count": 76
     },
     {
-      "name": "upstart",
+      "name": "chime",
       "ok": true,
       "count": 75
     },

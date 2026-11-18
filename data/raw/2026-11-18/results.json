@@ -17,7 +17,7 @@
   {
     "name": "robinhood",
     "ok": true,
-    "count": 165
+    "count": 167
   },
   {
     "name": "savvy",
@@ -37,7 +37,7 @@
   {
     "name": "affirm",
     "ok": true,
-    "count": 221
+    "count": 227
   },
   {
     "name": "brex",
@@ -47,12 +47,12 @@
   {
     "name": "coinbase",
     "ok": true,
-    "count": 257
+    "count": 256
   },
   {
     "name": "upstart",
     "ok": true,
-    "count": 75
+    "count": 76
   },
   {
     "name": "mercury",
@@ -82,12 +82,12 @@
   {
     "name": "raymondjames",
     "ok": true,
-    "count": 297
+    "count": 296
   },
   {
     "name": "merrill",
     "ok": true,
-    "count": 497
+    "count": 498
   },
   {
     "name": "morganstanley",
@@ -97,16 +97,16 @@
   {
     "name": "lpl",
     "ok": true,
-    "count": 323
+    "count": 319
   },
   {
     "name": "wellsfargo",
     "ok": true,
-    "count": 1454
+    "count": 1466
   },
   {
     "name": "fidelity",
     "ok": true,
-    "count": 886
+    "count": 892
   }
 ]

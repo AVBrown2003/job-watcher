@@ -294,5 +294,5 @@ html {
 }
 body { z-index: 1; box-shadow: 0 0 0 3px #2a1f1a, 6px 9px 0 rgba(60, 30, 10, .38), 0 22px 40px rgba(60, 30, 10, .35); }
 .desk-items { position: absolute; top: 0; left: 0; right: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.desk-item { position: absolute; filter: drop-shadow(5px 7px 0 rgba(60, 30, 10, .35)); }
+.desk-item { position: absolute; filter: drop-shadow(7px 11px 8px rgba(45, 22, 6, .45)); }
 .desk-item svg { display: block; }

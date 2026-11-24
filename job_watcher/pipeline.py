@@ -77,13 +77,27 @@ def issue_body(rows: list[dict], date: str, status: dict) -> str:
     ]
     if failed:
         out.append(f"Sources that failed today: {', '.join(failed)}.")
-    out += ["", f"## New postings ({len(new)})", *lines(new),
-            "", f"## Removed postings ({len(removed)})", *lines(removed)]
+    # GitHub rejects issue bodies over 65,536 chars: give each list half the
+    # room, role matches first (lines() sorts them first), and say what was cut.
+    def capped(items, budget):
+        kept, used = [], 0
+        for line in lines(items):
+            if used + len(line) + 1 > budget:
+                kept.append(f"- ...and {len(items) - len(kept)} more, see data/history.csv")
+                break
+            kept.append(line)
+            used += len(line) + 1
+        return kept
+
+    out += ["", f"## New postings ({len(new)})", *capped(new, 30000),
+            "", f"## Removed postings ({len(removed)})", *capped(removed, 30000)]
     return "\n".join(out)
 
 
-def gh(*args: str, check: bool = True) -> str:
-    proc = subprocess.run(["gh", *args], capture_output=True, text=True)
+def gh(*args: str, check: bool = True, stdin: str | None = None) -> str:
+    # long text goes in over stdin (--body-file -), never as a command-line argument
+    proc = subprocess.run(["gh", *args], capture_output=True, text=True, input=stdin,
+                          encoding="utf-8")
     if check and proc.returncode != 0:
         raise RuntimeError(f"gh {' '.join(args)}: {proc.stderr.strip()}")
     return proc.stdout
@@ -95,9 +109,9 @@ def update_issues(date: str, body: str) -> None:
                            "--json", "number,title"))
     today = [i for i in issues if i["title"] == date]
     if today:
-        gh("issue", "edit", str(today[0]["number"]), "--body", body)
+        gh("issue", "edit", str(today[0]["number"]), "--body-file", "-", stdin=body)
     else:
-        gh("issue", "create", "--title", date, "--body", body)
+        gh("issue", "create", "--title", date, "--body-file", "-", stdin=body)
     for issue in issues:
         title = issue["title"]
         if title != date and build.DATE_RE.match(title) and title < date:
@@ -125,7 +139,10 @@ def main(argv: list[str] | None = None) -> int:
     print(json.dumps(status))
 
     if not args.no_issues:
-        update_issues(date, issue_body(rows, date, status))
+        try:
+            update_issues(date, issue_body(rows, date, status))
+        except Exception as exc:  # noqa: BLE001 - the issue must never block the data commit
+            print(f"::warning::issue step failed: {exc}")
     return 0
 
 

@@ -80,3 +80,14 @@ def test_second_run_replaces_the_days_raw_files(tmp_path, monkeypatch):
     monkeypatch.setattr(pipeline.sources, "fetch", broken)
     pipeline.run_sources("2026-01-01")
     assert not (tmp_path / "2026-01-01" / f"{one[0].name}.json.gz").exists()
+
+
+def test_issue_body_stays_under_github_limit_with_huge_diff():
+    rows = [{"first_seen": "2026-01-02", "first_run": False, "removed_date": "2026-01-02",
+             "in_role": i % 50 == 0, "employer": "E", "title": f"Job {i} " + "x" * 60,
+             "url": "https://example.com/" + "y" * 80, "location": "Austin, TX"}
+            for i in range(3000)]
+    body = pipeline.issue_body(rows, "2026-01-02", {"run_time": "t", "open": 1, "sources": []})
+    assert len(body) < 65000
+    assert "more, see data/history.csv" in body
+    assert "**[your role]**" in body

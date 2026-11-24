@@ -9,7 +9,7 @@ A tool that watches the job market for **financial advisor** roles. Every day Gi
 
 ## How it works
 
-1. `daily.yml` runs once a day (14:00 UTC, 8:00 AM Central) and calls `python -m job_watcher.pipeline`.
+1. `daily.yml` runs once a day (09:00 UTC, 3:00 AM UTC-6) and calls `python -m job_watcher.pipeline`.
 2. Every source is called and saved as `data/raw/<date>/<source>.json.gz`. A source that fails writes no raw file that day; one failing source does not stop the run. An empty board is also treated as a failed call, so a glitch cannot make every posting look removed. The result of every source is in `data/raw/<date>/results.json`.
 3. `data/history.csv` is rebuilt from the raw files alone (see below).
 4. `data/status.json` is written for the latest run.

@@ -1,60 +1,60 @@
 {
-  "run_time": "2026-11-24T00:52:09Z",
+  "run_time": "2026-11-24T19:45:41Z",
   "first_run_date": "2026-11-18",
   "days_with_success": 2,
-  "open": 6134,
-  "new_today": 885,
-  "removed_today": 928,
+  "open": 6100,
+  "new_today": 987,
+  "removed_today": 1064,
   "sources": [
     {
       "name": "wellsfargo",
       "ok": true,
-      "count": 1484
+      "count": 1478
     },
     {
       "name": "morganstanley",
       "ok": true,
-      "count": 1138
+      "count": 1127
     },
     {
       "name": "fidelity",
       "ok": true,
-      "count": 874
+      "count": 865
     },
     {
       "name": "merrill",
       "ok": true,
-      "count": 489
+      "count": 491
     },
     {
       "name": "lpl",
       "ok": true,
-      "count": 316
+      "count": 318
     },
     {
       "name": "raymondjames",
       "ok": true,
-      "count": 307
+      "count": 302
     },
     {
       "name": "brex",
       "ok": true,
-      "count": 260
+      "count": 264
     },
     {
       "name": "coinbase",
       "ok": true,
-      "count": 250
+      "count": 251
     },
     {
       "name": "affirm",
       "ok": true,
-      "count": 220
+      "count": 216
     },
     {
       "name": "robinhood",
       "ok": true,
-      "count": 159
+      "count": 157
     },
     {
       "name": "plaid",
@@ -64,7 +64,7 @@
     {
       "name": "chime",
       "ok": true,
-      "count": 81
+      "count": 79
     },
     {
       "name": "upstart",
@@ -72,24 +72,24 @@
       "count": 76
     },
     {
-      "name": "altruist",
-      "ok": true,
-      "count": 68
-    },
-    {
       "name": "mercury",
       "ok": true,
-      "count": 68
+      "count": 72
+    },
+    {
+      "name": "altruist",
+      "ok": true,
+      "count": 66
     },
     {
       "name": "sofi",
       "ok": true,
-      "count": 56
+      "count": 53
     },
     {
       "name": "savvy",
       "ok": true,
-      "count": 32
+      "count": 33
     },
     {
       "name": "vestwell",
@@ -104,12 +104,12 @@
     {
       "name": "betterment",
       "ok": true,
-      "count": 25
+      "count": 23
     },
     {
       "name": "wealthfront",
       "ok": true,
-      "count": 20
+      "count": 19
     },
     {
       "name": "acorns",

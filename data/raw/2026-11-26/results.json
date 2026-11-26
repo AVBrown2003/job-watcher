@@ -1,0 +1,112 @@
+[
+  {
+    "name": "betterment",
+    "ok": true,
+    "count": 23
+  },
+  {
+    "name": "altruist",
+    "ok": true,
+    "count": 63
+  },
+  {
+    "name": "sofi",
+    "ok": true,
+    "count": 57
+  },
+  {
+    "name": "robinhood",
+    "ok": true,
+    "count": 162
+  },
+  {
+    "name": "savvy",
+    "ok": true,
+    "count": 34
+  },
+  {
+    "name": "vestwell",
+    "ok": true,
+    "count": 35
+  },
+  {
+    "name": "chime",
+    "ok": true,
+    "count": 77
+  },
+  {
+    "name": "affirm",
+    "ok": true,
+    "count": 216
+  },
+  {
+    "name": "brex",
+    "ok": true,
+    "count": 270
+  },
+  {
+    "name": "coinbase",
+    "ok": true,
+    "count": 256
+  },
+  {
+    "name": "upstart",
+    "ok": true,
+    "count": 74
+  },
+  {
+    "name": "mercury",
+    "ok": true,
+    "count": 68
+  },
+  {
+    "name": "plaid",
+    "ok": true,
+    "count": 144
+  },
+  {
+    "name": "nerdwallet",
+    "ok": true,
+    "count": 27
+  },
+  {
+    "name": "acorns",
+    "ok": true,
+    "count": 8
+  },
+  {
+    "name": "wealthfront",
+    "ok": true,
+    "count": 19
+  },
+  {
+    "name": "raymondjames",
+    "ok": true,
+    "count": 304
+  },
+  {
+    "name": "merrill",
+    "ok": true,
+    "count": 489
+  },
+  {
+    "name": "morganstanley",
+    "ok": true,
+    "count": 1119
+  },
+  {
+    "name": "lpl",
+    "ok": true,
+    "count": 325
+  },
+  {
+    "name": "wellsfargo",
+    "ok": true,
+    "count": 1552
+  },
+  {
+    "name": "fidelity",
+    "ok": true,
+    "count": 856
+  }
+]

@@ -1,25 +1,25 @@
 {
-  "run_time": "2026-11-26T18:54:59Z",
+  "run_time": "2026-11-27T18:46:54Z",
   "first_run_date": "2026-11-18",
-  "days_with_success": 4,
-  "open": 6178,
-  "new_today": 125,
-  "removed_today": 134,
+  "days_with_success": 5,
+  "open": 5991,
+  "new_today": 43,
+  "removed_today": 235,
   "sources": [
     {
       "name": "wellsfargo",
       "ok": true,
-      "count": 1552
+      "count": 1398
     },
     {
       "name": "morganstanley",
       "ok": true,
-      "count": 1119
+      "count": 1097
     },
     {
       "name": "fidelity",
       "ok": true,
-      "count": 856
+      "count": 849
     },
     {
       "name": "merrill",
@@ -34,12 +34,12 @@
     {
       "name": "raymondjames",
       "ok": true,
-      "count": 304
+      "count": 305
     },
     {
       "name": "brex",
       "ok": true,
-      "count": 270
+      "count": 266
     },
     {
       "name": "coinbase",
@@ -49,12 +49,12 @@
     {
       "name": "affirm",
       "ok": true,
-      "count": 216
+      "count": 218
     },
     {
       "name": "robinhood",
       "ok": true,
-      "count": 162
+      "count": 161
     },
     {
       "name": "plaid",
@@ -64,7 +64,7 @@
     {
       "name": "chime",
       "ok": true,
-      "count": 77
+      "count": 76
     },
     {
       "name": "upstart",
@@ -104,7 +104,7 @@
     {
       "name": "betterment",
       "ok": true,
-      "count": 23
+      "count": 22
     },
     {
       "name": "wealthfront",
